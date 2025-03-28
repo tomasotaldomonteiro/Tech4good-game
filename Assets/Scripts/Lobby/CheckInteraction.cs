@@ -7,6 +7,9 @@ using UnityEngine.SceneManagement;
 
 public class CheckInteraction : MonoBehaviour
 {
+    [SerializeField] private GameObject dialogueBox;
+    [SerializeField] private GameObject dialogueText;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -23,14 +26,15 @@ public class CheckInteraction : MonoBehaviour
     {
         GameObject interactionText = GameObject.FindWithTag("UI").transform.GetChild(0).gameObject;
         interactionText.SetActive(true);
-        
+        interactionText.transform.position = Input.mousePosition;
         if (!Input.GetMouseButtonDown(0))
         {
             return;
         }
         
         interactionText.SetActive(false);
-        SceneManager.LoadScene(2);
+        dialogueBox.SetActive(true);
+        dialogueText.SetActive(true);
         Debug.Log("Mouse over");
     }
 
