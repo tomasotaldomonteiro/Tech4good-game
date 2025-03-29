@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
 {
     public Rigidbody2D rb;
     public float speed = 10f;
+    public Animator animator;
     public float health = 30f;
 
     [SerializeField] private InputActionReference MovementControls;
@@ -23,7 +24,7 @@ public class PlayerController : MonoBehaviour
     private void Start()
     {
         MovementControls.action.performed += MovementControlsWhenPerformed;
-        MovementControls.action.canceled += MovementControlsWhenCanceled; 
+        MovementControls.action.canceled += MovementControlsWhenCanceled; // Handle when movement stops
     }
 
     void MovementControlsWhenPerformed(InputAction.CallbackContext context)
@@ -33,17 +34,18 @@ public class PlayerController : MonoBehaviour
 
     void MovementControlsWhenCanceled(InputAction.CallbackContext context)
     {
-        movement = Vector2.zero;
+        movement = Vector2.zero; // Stop movement when controls are canceled
     }
 
     void Update()
     {
+       
         if (movement != Vector2.zero)
         {
             float angle = Mathf.Atan2(movement.y, movement.x) * Mathf.Rad2Deg;
-            transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
+            transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle)); 
         }
-
+        
         if (health <= 0)
         {
             StartCoroutine(Death());
@@ -53,8 +55,9 @@ public class PlayerController : MonoBehaviour
     void FixedUpdate()
     {
         rb.velocity = movement.normalized * speed;
+        animator.SetFloat("Speed", movement.magnitude);
     }
-
+    
     private IEnumerator Death()
     {
         yield return new WaitForSeconds(2f);
