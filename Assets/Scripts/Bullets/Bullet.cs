@@ -22,8 +22,8 @@ public class Bullet : MonoBehaviour
         if (collision.gameObject.CompareTag("Enemy"))
         {
             Debug.Log($"Hit: {collision.gameObject.name}");
-            // Here you can apply damage to the enemy if needed
-            // Example: collision.gameObject.GetComponent<Enemy>().TakeDamage(damage);
+            
+            collision.gameObject.GetComponent<EnemyBehaviour>().health -= damage;
         } else if (collision.gameObject.CompareTag("Player"))
         {
             Debug.Log($"Hit: {collision.gameObject.name}");

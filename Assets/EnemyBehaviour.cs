@@ -12,7 +12,7 @@ public class EnemyBehaviour : MonoBehaviour
     private bool canFire = true;
     public bool isShooting = false;
     
-    public int health = 20;
+    public float health = 20;
     
     
     // Start is called before the first frame update
