@@ -1,22 +1,32 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class Shooting : MonoBehaviour
 {
     [SerializeField] GameObject bulletPrefab;
     [SerializeField] Transform bulletSpawn;
-    [SerializeField] float firingCooldown = 0.1f;
+    [SerializeField] float firingCooldown = 0.2f;
+    [SerializeField] private GameObject bulletsParent;
     private bool canFire = true;
+
+    [SerializeField] private InputActionReference ShootingControls;
+
+    void OnEnable()
+    {
+        ShootingControls.action.Enable();
+    }
 
     void Start()
     {
-        bulletSpawn = transform.GetChild(1).transform;
+        ShootingControls.action.performed += WhenShootingIsPerformed;
+        bulletSpawn = transform.GetChild(0).transform;
     }
 
-    void Update()
+    void WhenShootingIsPerformed(InputAction.CallbackContext callbackContext)
     {
-        if (Input.GetMouseButtonDown(0) && canFire)
+        if (canFire)
         {
             SpawnBullet();
         }
@@ -24,14 +34,17 @@ public class Shooting : MonoBehaviour
 
     void SpawnBullet()
     {
-        Instantiate(bulletPrefab, bulletSpawn.position, bulletSpawn.rotation);
-        canFire = false; 
-        StartCoroutine(FireCooldown()); 
+        // Instantiate the bullet
+        Instantiate(bulletPrefab, bulletSpawn.position, bulletSpawn.rotation, bulletsParent.transform);
+        
+        // Start the cooldown coroutine
+        StartCoroutine(FireCooldown());
     }
 
     private IEnumerator FireCooldown()
     {
-        yield return new WaitForSeconds(firingCooldown); 
-        canFire = true; 
+        canFire = false; // Prevent firing
+        yield return new WaitForSeconds(firingCooldown); // Wait for the cooldown duration
+        canFire = true; // Allow firing again
     }
 }
