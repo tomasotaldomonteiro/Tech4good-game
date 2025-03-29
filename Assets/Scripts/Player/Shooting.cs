@@ -18,6 +18,11 @@ public class Shooting : MonoBehaviour
         ShootingControls.action.Enable();
     }
 
+    void OnDisable()
+    {
+        ShootingControls.action.Disable();
+    }
+
     void Start()
     {
         ShootingControls.action.performed += WhenShootingIsPerformed;

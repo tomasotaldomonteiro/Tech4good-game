@@ -3,11 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
     public Rigidbody2D rb;
     public float speed = 10f;
+    public float health = 30f;
 
     [SerializeField] private InputActionReference MovementControls;
 
@@ -42,10 +44,21 @@ public class PlayerController : MonoBehaviour
             float angle = Mathf.Atan2(movement.y, movement.x) * Mathf.Rad2Deg; // Calculate angle in degrees
             transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle)); // Rotate the player
         }
+
+        if (health <= 0)
+        {
+            StartCoroutine(Death());
+        }
     }
 
     void FixedUpdate()
     {
         rb.velocity = movement.normalized * speed; // Normalize movement to maintain consistent speed
+    }
+
+    private IEnumerator Death()
+    {
+        yield return new WaitForSeconds(2f);
+        SceneManager.LoadScene(1);
     }
 }

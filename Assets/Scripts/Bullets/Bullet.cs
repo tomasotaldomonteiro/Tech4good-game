@@ -21,12 +21,11 @@ public class Bullet : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Enemy"))
         {
-            Debug.Log($"Hit: {collision.gameObject.name}");
-            
             collision.gameObject.GetComponent<EnemyBehaviour>().health -= damage;
         } else if (collision.gameObject.CompareTag("Player"))
         {
-            Debug.Log($"Hit: {collision.gameObject.name}");
+            collision.gameObject.GetComponent<PlayerController>().health -= damage;
+            Debug.Log(collision.gameObject.GetComponent<PlayerController>().health);
         }
         
         Destroy(gameObject); // Destroy the bullet on collision
