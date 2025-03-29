@@ -731,8 +731,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -161, y: 246}
-  m_SizeDelta: {x: 1057.8, y: 154.3}
+  m_AnchoredPosition: {x: -109.12427, y: 246.71057}
+  m_SizeDelta: {x: 1206.1309, y: 152.2681}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &626643785
 MonoBehaviour:
@@ -767,7 +767,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: If I were young
+  m_Text: When I was young
 --- !u!222 &626643786
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1047,7 +1047,7 @@ SpriteRenderer:
   m_Size: {x: 11.96, y: 4.98}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1 &1658189812
@@ -1131,7 +1131,7 @@ SpriteRenderer:
   m_Size: {x: 11.96, y: 4.98}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1 &1973646837
