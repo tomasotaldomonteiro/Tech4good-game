@@ -21,7 +21,7 @@ public class Dialogue : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetMouseButtonDown(0))
         {
             if (textComponent.text == lines[index])
             {
@@ -66,7 +66,7 @@ public class Dialogue : MonoBehaviour
 
     IEnumerator LoadScene()
     {
-        SceneManager.LoadScene(2);
+        SceneManager.LoadScene(3);
         yield return new WaitForSeconds(2);
     }
 }
