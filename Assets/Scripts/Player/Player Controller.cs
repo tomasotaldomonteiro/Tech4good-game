@@ -8,28 +8,40 @@ public class PlayerController : MonoBehaviour
 {
     public Rigidbody2D rb;
     public float speed = 10f;
-    public InputAction PlayerControls;
     
-    Vector2 movement = Vector2.zero;
+    [SerializeField] private InputActionReference PlayerControls;
+    
+    private Vector2 movement;
 
     private void OnEnable()
     {
-        PlayerControls.Enable();
+        PlayerControls.action.Enable();
     }
 
-    private void OnDisable()
+    // private void OnDisable()
+    // {
+    //     PlayerControls.Disable();
+    // }
+
+    private void Start()
     {
-        PlayerControls.Disable();
+        PlayerControls.action.performed += PlayerControlsWhenPerformed;
+    }
+
+    void PlayerControlsWhenPerformed(InputAction.CallbackContext context)
+    {
+        movement = context.ReadValue<Vector2>();
     }
 
     // Update is called once per frame
     void Update()
     {
-      float moveX = Input.GetAxis("Horizontal");
-      float moveY = Input.GetAxis("Vertical");
-      movement = new Vector2(moveX, moveY).normalized;
+      // float moveX = Input.GetAxis("Horizontal");
+      // float moveY = Input.GetAxis("Vertical");
+      // movement = new Vector2(moveX, moveY).normalized;
+      //
+      // movement = PlayerControls.ReadValue<Vector2>();
       
-      movement = PlayerControls.ReadValue<Vector2>();
     }
 
     void FixedUpdate()
