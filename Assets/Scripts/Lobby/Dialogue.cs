@@ -66,7 +66,7 @@ public class Dialogue : MonoBehaviour
 
     IEnumerator LoadScene()
     {
-        SceneManager.LoadScene(3);
+        SceneManager.LoadScene(2);
         yield return new WaitForSeconds(2);
     }
 }
