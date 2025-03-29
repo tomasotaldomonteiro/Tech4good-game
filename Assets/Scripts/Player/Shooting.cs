@@ -35,8 +35,13 @@ public class Shooting : MonoBehaviour
     void SpawnBullet()
     {
         // Instantiate the bullet
-        Instantiate(bulletPrefab, bulletSpawn.position, bulletSpawn.rotation, bulletsParent.transform);
-        
+        GameObject bullet = Instantiate(bulletPrefab, bulletSpawn.position, bulletSpawn.rotation, bulletsParent.transform);
+    
+        // Get the Bullet component and initialize it with the shooting direction
+        Bullet bulletScript = bullet.GetComponent<Bullet>();
+        Vector2 shootDirection = bulletSpawn.right; // Assuming the bulletSpawn's right direction is the shooting direction
+        bulletScript.Initialize(shootDirection);
+    
         // Start the cooldown coroutine
         StartCoroutine(FireCooldown());
     }

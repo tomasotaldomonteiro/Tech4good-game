@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Bullet : MonoBehaviour
@@ -7,44 +6,29 @@ public class Bullet : MonoBehaviour
     [SerializeField] private float bulletSpeed = 35f;
     [SerializeField] private float damage = 10f;
     [SerializeField] private float lifetime = 2f;
-    [SerializeField] private Transform player;
+
     private Rigidbody2D rb;
 
-    private Vector3 direction;
-    // Start is called before the first frame update
-    void Start()
+    // This method initializes the bullet's direction
+    public void Initialize(Vector2 direction)
     {
-        player = GameObject.FindGameObjectWithTag("Player").transform;
-        direction = bulletSpeed * player.right;
-        rb = gameObject.GetComponent<Rigidbody2D>();
-        StartCoroutine(DestroyAfterLifeTime());
+        rb = GetComponent<Rigidbody2D>();
+        rb.velocity = direction.normalized * bulletSpeed; // Set the bullet's velocity
+        StartCoroutine(DestroyAfterLifetime());
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        MoveBullet();
-    }
-    
-    void OnCollisionEnter2D(Collision2D collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Enemy"))
         {
-            Debug.Log(collision.gameObject.name);
+            Debug.Log($"Hit: {collision.gameObject.name}");
+            // Here you can apply damage to the enemy if needed
+            // Example: collision.gameObject.GetComponent<Enemy>().TakeDamage(damage);
         }
-        Debug.Log(Time.realtimeSinceStartup);
-        Destroy(gameObject);
-    }
-    
-    void MoveBullet()
-    {
-        Vector2 newPosition = transform.position + direction * Time.deltaTime;
-        rb.MovePosition(newPosition);
-        
-        // rb.velocity = new Vector2(bulletSpeed * player.right, rb.velocity.y) * Time.deltaTime;
+        Destroy(gameObject); // Destroy the bullet on collision
     }
 
-    private IEnumerator DestroyAfterLifeTime()
+    private IEnumerator DestroyAfterLifetime()
     {
         yield return new WaitForSeconds(lifetime);
         Destroy(gameObject);
