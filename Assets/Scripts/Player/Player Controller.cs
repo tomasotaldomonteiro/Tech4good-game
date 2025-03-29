@@ -23,7 +23,7 @@ public class PlayerController : MonoBehaviour
     private void Start()
     {
         MovementControls.action.performed += MovementControlsWhenPerformed;
-        MovementControls.action.canceled += MovementControlsWhenCanceled; // Handle when movement stops
+        MovementControls.action.canceled += MovementControlsWhenCanceled; 
     }
 
     void MovementControlsWhenPerformed(InputAction.CallbackContext context)
@@ -33,16 +33,15 @@ public class PlayerController : MonoBehaviour
 
     void MovementControlsWhenCanceled(InputAction.CallbackContext context)
     {
-        movement = Vector2.zero; // Stop movement when controls are canceled
+        movement = Vector2.zero;
     }
 
     void Update()
     {
-        // Rotate the player to face the movement direction
         if (movement != Vector2.zero)
         {
-            float angle = Mathf.Atan2(movement.y, movement.x) * Mathf.Rad2Deg; // Calculate angle in degrees
-            transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle)); // Rotate the player
+            float angle = Mathf.Atan2(movement.y, movement.x) * Mathf.Rad2Deg;
+            transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
         }
 
         if (health <= 0)
@@ -53,7 +52,7 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
-        rb.velocity = movement.normalized * speed; // Normalize movement to maintain consistent speed
+        rb.velocity = movement.normalized * speed;
     }
 
     private IEnumerator Death()

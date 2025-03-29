@@ -21,11 +21,14 @@ public class Bullet : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Enemy"))
         {
-            collision.gameObject.GetComponent<EnemyBehaviour>().health -= damage;
+                collision.gameObject.GetComponent<EnemyBehaviour>().health -= damage;
         } else if (collision.gameObject.CompareTag("Player"))
         {
             collision.gameObject.GetComponent<PlayerController>().health -= damage;
             Debug.Log(collision.gameObject.GetComponent<PlayerController>().health);
+        } else if (collision.gameObject.CompareTag("Ally"))
+        {
+            collision.gameObject.GetComponent<AllyBehaviour>().health += damage;
         }
         
         Destroy(gameObject); // Destroy the bullet on collision

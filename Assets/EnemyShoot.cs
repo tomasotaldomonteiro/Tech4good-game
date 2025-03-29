@@ -39,8 +39,7 @@ public class EnemyShoot : MonoBehaviour
         Vector3 direction = collision.transform.position - enemy.transform.position;
         
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-
-        // Set the rotation of the enemy
+        
         enemy.transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
     }
     
