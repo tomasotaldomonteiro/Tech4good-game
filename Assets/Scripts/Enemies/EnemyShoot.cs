@@ -40,7 +40,7 @@ public class EnemyShoot : MonoBehaviour
         
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         
-        enemy.transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
+        enemy.transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle + 90));
     }
     
     private void OnTriggerExit2D(Collider2D other)

@@ -9,11 +9,16 @@ public class Dialogue : MonoBehaviour
     [SerializeField] private string[] lines;
     [SerializeField] private TextMeshProUGUI textComponent;
     [SerializeField] private float textSpeed;
+    private bool alliesSaved = false;
 
     private int index;
     // Start is called before the first frame update
     void Start()
     {
+        if (SceneManager.GetActiveScene().name == "Ending")
+        {
+            alliesSaved = true;
+        }
         textComponent.text = string.Empty;
         StartDialogue();
     }
@@ -67,6 +72,13 @@ public class Dialogue : MonoBehaviour
     IEnumerator LoadScene()
     {
         yield return new WaitForSeconds(2);
-        SceneManager.LoadScene(2);
+        if (alliesSaved)
+        {
+            SceneManager.LoadScene("Menu");
+        }
+        else
+        {
+            SceneManager.LoadScene(2);
+        }
     }
 }

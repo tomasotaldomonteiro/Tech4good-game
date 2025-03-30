@@ -60,7 +60,8 @@ public class PlayerController : MonoBehaviour
     
     private IEnumerator Death()
     {
-        yield return new WaitForSeconds(2f);
-        SceneManager.LoadScene(1);
+        Destroy(GameObject.Find("AllyManager"));
+        yield return new WaitForSeconds(1f);
+        SceneManager.LoadScene(3);
     }
 }
