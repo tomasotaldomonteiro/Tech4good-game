@@ -75,6 +75,7 @@ public class Dialogue : MonoBehaviour
         if (alliesSaved)
         {
             SceneManager.LoadScene("Menu");
+            Destroy(GameObject.FindWithTag("Music"));
         }
         else
         {

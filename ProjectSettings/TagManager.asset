@@ -9,6 +9,7 @@ TagManager:
   - Bullet
   - BulletManager
   - Ally
+  - Music
   layers:
   - Default
   - TransparentFX

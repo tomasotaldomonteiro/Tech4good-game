@@ -60,7 +60,7 @@ public class PlayerController : MonoBehaviour
     
     private IEnumerator Death()
     {
-        Destroy(GameObject.Find("AllyManager"));
+        Destroy(GameObject.FindWithTag("Music"));
         yield return new WaitForSeconds(1f);
         SceneManager.LoadScene(3);
     }
