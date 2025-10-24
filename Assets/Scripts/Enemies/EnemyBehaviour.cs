@@ -31,6 +31,7 @@ public class EnemyBehaviour : MonoBehaviour
 
         if (health <= 0)
         {
+            StopCoroutine(FireCooldown());
             Destroy(gameObject);
         }
     }
